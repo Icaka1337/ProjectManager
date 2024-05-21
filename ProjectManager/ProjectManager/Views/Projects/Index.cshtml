@@ -1,0 +1,49 @@
+﻿@model List<Project>
+@{
+}
+
+    <h2 class="text-center mb-5"> List of Projects</h2>
+
+    <div class="row mb-5">
+        <div class="col">
+            <a class="btn btn-primary" asp-controller="Projects" asp-action="Create">New Project</a>
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ProjectID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Budget</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var project in Model)
+        {
+            <tr>
+                <td>@project.ProjectId</td>
+                <td>@project.Name</td>
+                <td>@project.Description</td>
+                <td>@project.StartDate.ToString("dd/MM/yyyy")</td>
+                <td>@project.EndDate.ToString("dd/MM/yyyy")</td>
+                <td>@(project.Budget)lv</td>
+                <td style="white-space:nowrap">
+                    <a class="btn btn-primary btn-sm" asp-controller="Projects" asp-action="Edit" 
+                    asp-route-id="@project.ProjectId">Edit</a>
+                    <a class="btn btn-danger btn-sm" asp-controller="Projects" asp-action="Delete"
+                    asp-route-id="@project.ProjectId">Delete</a>
+                    <a class="btn btn-outline-success">View Project Tasks</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+
+    </table>
