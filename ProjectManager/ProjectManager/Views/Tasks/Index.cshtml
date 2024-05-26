@@ -1,0 +1,42 @@
+﻿@model List<ProjectManager.Models.Task>
+@{
+}
+<h2 class="text-center mb-5">Tasks</h2>
+
+<div class="text-center">
+    <div class="col">
+        <a class="btn btn-outline-primary" asp-controller="Tasks" asp-action="Create">New Task</a>
+    </div>
+    <div class="col">
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Due date</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var task in Model)
+    {
+        <tr>
+            <td>@task.Title</td>
+            <td>@task.Description</td>
+            <td>@task.DueDate.ToString("dd/MM/yyyy")</td>
+            <td>@(task.Status)</td>
+            <td style="white-space:nowrap">
+                <a class="btn btn-outline-primary btn-sm" asp-controller="Tasks" asp-action="Edit"
+                   asp-route-id="@task.TaskId">Edit</a>
+                <a class="btn btn-outline-danger btn-sm" asp-controller="Tasks" asp-action="Delete"
+                   asp-route-id="@task.TaskId" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+
+</table>

@@ -1,0 +1,46 @@
+﻿@using Task = ProjectManager.Models.Task
+@using Project = ProjectManager.Models.ProjectDto
+@model List<ProjectManager.Models.Task>
+@{
+}
+
+<h2 class="text-center mb-5">Tasks for this project</h2>
+
+<div class="text-center">
+    <div class="col">
+        <a class="btn btn-outline-primary" asp-controller="Tasks" asp-action="Create" asp-route-id="@typeof(Project)">Create new task for this project</a>
+
+        <a class="btn btn-outline-danger" asp-controller="Projects" asp-action="Index" role="button">Cancel</a>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Due Date</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    @foreach (var task in Model)
+    {
+        <tr>
+            <td>@task.Title</td>
+            <td>@task.Description</td>
+            <td>@task.Status</td>
+            <td>@task.DueDate.ToString("dd/MM/yyyy")</td>
+            <td style="white-space:nowrap">
+                <a class="btn btn-outline-primary btn-sm" asp-controller="Tasks" asp-action="Edit"
+                   asp-route-id="@task.TaskId">Edit</a>
+                <a class="btn btn-outline-danger btn-sm" asp-controller="Tasks" asp-action="Delete"
+                   asp-route-id="@task.TaskId" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+
+</table>

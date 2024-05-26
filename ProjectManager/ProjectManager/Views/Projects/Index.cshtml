@@ -2,7 +2,7 @@
 @{
 }
 
-<h2 class="text-center mb-5"> List of Projects</h2>
+<h2 class="text-center mb-5">Projects</h2>
 
 <div class="text-center">
     <div class="col">
@@ -38,9 +38,9 @@
                     <a class="btn btn-outline-primary btn-sm" asp-controller="Projects" asp-action="Edit"
                        asp-route-id="@project.ProjectId">Edit</a>
                     <a class="btn btn-outline-danger btn-sm" asp-controller="Projects" asp-action="Delete"
-                       asp-route-id="@project.ProjectId">Delete</a>
+                       asp-route-id="@project.ProjectId" onclick="return confirm('Are you sure?')">Delete</a>
                     <a class="btn btn-outline-success btn-sm" asp-controller="Projects" asp-action="ViewTasks"
-                       asp-route-id="@project.Tasks">View Tasks</a>
+                       asp-route-id="@project.ProjectId">View Tasks</a>
                 </td>
             </tr>
         }

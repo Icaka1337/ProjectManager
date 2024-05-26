@@ -33,8 +33,6 @@ namespace ProjectManager.Controllers
                 return View(projectDto);
             }
 
-            //Save the new project in database
-
             Project project = new Project()
             {
                 Name = projectDto.Name,
@@ -100,7 +98,22 @@ namespace ProjectManager.Controllers
             return RedirectToAction("Index", "Projects");
         }
 
-        public IActionResult ShowTasksResult(int id)
+        public IActionResult Delete(int id)
+        {
+            var project = context.Projects.Find(id);
+
+            if (project == null)
+            {
+                return RedirectToAction("Index", "Projects");
+            }
+
+            context.Projects.Remove(project);
+            context.SaveChanges();
+
+            return RedirectToAction("Index", "Projects");
+        }   
+
+        public IActionResult ViewTasks(int id)
         {
             var tasksForProject = context.Tasks.Where(p => p.ProjectId == id).ToList();
             return View(tasksForProject);
